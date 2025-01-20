@@ -1,3 +1,78 @@
 /* Everything that is global comes in here */
 :root {
+  /* color */
+  --prime-orange: #ff8000;
+
+  /* shadow */
+  --shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+header {
+  height: 80px;
+  background-color: var(--prime-orange);
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-inline: 45px;
+}
+
+.header-logo {
+  width: 155px;
+}
+
+.header-logo,
+.header-burger-icon {
+  display: grid;
+  place-content: center;
+}
+
+.header-logo img,
+.header-burger-icon img {
+  width: 100%;
+  cursor: pointer;
+}
+
+.header-burger-icon {
+  width: 40px;
+  aspect-ratio: 1 /1;
+}
+
+.main {
+  display: flex;
+  flex-direction: row;
+  /* flex-grow: 1; */
+}
+
+.left-content-section {
+  width: calc(100% - 470px);
+}
+
+.background-img-section {
+  height: 450px;
+}
+
+.background-img-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.shopping-cart-container {
+  width: 470px;
+  flex-grow: 1;
+  box-shadow: -4px 0px 6px rgba(0, 0, 0, 0.1);
+}
+
+.shoppin-card {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  height: 400px;
+}
+
+.dishes-container {
+  flex-grow: 1;
+  margin-inline: 300px;
+  height: 3000px;
 }
