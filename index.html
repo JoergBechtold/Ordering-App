@@ -39,7 +39,7 @@
         </div>
 
         <div id="categories" class="categories">
-          <a class="link" href="#id_header">Start</a>
+          <a class="link active" href="#id_header">Start</a>
           <a class="link" href="#Burger">Burger</a>
           <a class="link" href="#Supplement">Beilagen</a>
           <a class="link" href="#Drinks">Getränke</a>
@@ -72,6 +72,18 @@
       <section class="shopping-cart-container">
         <div class="shoppin-card">
           <h1>Warenkorb</h1>
+
+          <div class="switch-container">
+            <div id="delivery" class="switch-option active" onclick="switchToDelivery()"><span class="">Lieferung</span></div>
+            <div id="pickup" class="switch-option" onclick="switchToPickup()"><span class="">Abholung</span></div>
+          </div>
+
+          <div class="no-value-in-basket-container" id="no_value_in_basket_container">
+            <div class="no-value-in-basket-content">
+              <img src="assets/icons/icon-warenkorb-96.png" alt="Bild vom Warenkorb Icon" />
+              <h2>Dein Warenkorb ist leer</h2>
+            </div>
+          </div>
         </div>
       </section>
     </main>
