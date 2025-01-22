@@ -7,8 +7,10 @@
 
     <!-- Embedding scripts -->
     <!-- Scripts/templates must always be included before the normal scripts.js! -->
-    <script src="scripts/database-Jason.js"></script>
+    <script src="scripts/database-jason.js"></script>
     <script src="scripts/templates.js"></script>
+    <script src="scripts/generatedSingleDishesCard.js"></script>
+    <script src="scripts/assets.js"></script>
     <script src="script.js"></script>
 
     <!-- Embedding the favicon -->
@@ -20,30 +22,57 @@
     <link rel="stylesheet" href="styles/assets.css" />
     <link rel="stylesheet" href="styles/fonts.css" />
     <link rel="stylesheet" href="styles/standard.css" />
+    <link rel="stylesheet" href="styles/singleDishesCard.css" />
   </head>
-  <body>
-    <header>
+  <body onload="renderAllDishes()">
+    <header id="id_header">
       <div class="header-logo"><img src="assets/icons/Logo.png" alt="Logo Bestell App" /></div>
       <div class="header-burger-icon"><img src="assets/icons/burger-solid.svg" alt="" /></div>
     </header>
 
-    <main class="main">
+    <main>
       <!-- left content section -->
       <section class="left-content-section">
-        <div class="background-img-section">
-          <img src="assets/img/burger-background-2.png" alt="Hintergrundbild" />
+        <div class="background-section">
+          <img class="img-background-section" src="assets/img/burger-background-2.png" alt="Hintergrundbild" />
+          <img class="img-logo-burger-company" src="assets/img/Logo-Burger-Company.png" alt="Logo vom Burger Laden" />
         </div>
-        <div class="dishes-container">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Est quae commodi accusantium impedit eius, dignissimos earum aperiam perspiciatis
-          iste enim doloribus porro, beatae quia soluta pariatur? Quo fugiat itaque officiis. Lorem ipsum dolor sit amet consectetur adipisicing elit.
-          Magnam, suscipit excepturi totam maxime quod eius deleniti veniam expedita, quos quidem voluptate est tempore dicta error consectetur
-          provident perspiciatis saepe ipsa. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab, incidunt nulla pariatur obcaecati
-          perferendis maiores velit magnam expedita accusamus laudantium officiis minima libero ea doloribus tempora ipsam molestiae saepe quia.
+
+        <div id="categories" class="categories">
+          <a class="link" href="#id_header">Start</a>
+          <a class="link" href="#Burger">Burger</a>
+          <a class="link" href="#Supplement">Beilagen</a>
+          <a class="link" href="#Drinks">Getränke</a>
+        </div>
+
+        <div id="dishes_container" class="dishes-container">
+          <div id="Burger" class="headline-categories-over-single-dish-card">
+            <h1>Burger</h1>
+            <div id="dishes_cards_burger" class="dishes-cards-burger">
+              <!-- render burger dishes here with javascript -->
+            </div>
+          </div>
+
+          <div id="Supplement" class="headline-categories-over-single-dish-card">
+            <h1>Beilagen</h1>
+            <div id="dishes_cards_supplement" class="dishes-cards-supplement">
+              <!-- render supplement dishes here with javascript -->
+            </div>
+          </div>
+
+          <div id="Drinks" class="headline-categories-over-single-dish-card">
+            <h1>Getränke</h1>
+            <div id="dishes_cards_drinks" class="dishes-cards-drinks">
+              <!-- render drinks dishes here with javascript -->
+            </div>
+          </div>
         </div>
       </section>
 
       <section class="shopping-cart-container">
-        <div class="shoppin-card"><h1>hallo welt</h1></div>
+        <div class="shoppin-card">
+          <h1>Warenkorb</h1>
+        </div>
       </section>
     </main>
   </body>

@@ -2,15 +2,29 @@
 :root {
   /* color */
   --prime-orange: #ff8000;
+  --light-gray: #e6e4e4;
 
   /* shadow */
   --shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0px 0px 1px 0px rgba(0, 0, 0, 0.12), 0px 1px 5px 0px rgba(0, 0, 0, 0.04), 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+
+  /* margin */
+  --margin-300px: 300px;
+
+  /* border-radius */
+  --border-radius-10px: 10px;
+
+  /* font-sizes */
+  --font-size-h1: clamp(18px, 2.5vw, 28px);
+  --font-size-h2: clamp(16px, 2.5vw, 26px);
+  --font-size-span: clamp(12px, 2.5vw, 20px);
+  --font-size-links: clamp(14px, 2.5vw, 24px);
 }
 
 header {
   height: 80px;
   background-color: var(--prime-orange);
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--shadow);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,21 +52,32 @@ header {
   aspect-ratio: 1 /1;
 }
 
-.main {
+main {
   display: flex;
   flex-direction: row;
-  /* flex-grow: 1; */
+  flex-grow: 1;
 }
 
 .left-content-section {
   width: calc(100% - 470px);
+  background-color: var(--light-gray);
 }
 
-.background-img-section {
+.background-section {
+  position: relative;
   height: 450px;
 }
 
-.background-img-section img {
+.img-logo-burger-company {
+  width: 105px;
+  aspect-ratio: 1/1;
+  position: absolute;
+  bottom: 30px;
+  left: var(--margin-300px);
+  border-radius: 6px;
+}
+
+.img-background-section {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -71,8 +96,66 @@ header {
   height: 400px;
 }
 
+.shoppin-card h1 {
+  font-size: var(--font-size-h1);
+  text-align: center;
+  padding: 25px 45px 0 45px;
+}
+
 .dishes-container {
-  flex-grow: 1;
-  margin-inline: 300px;
-  height: 3000px;
+  /* flex-grow: 1; */
+  margin-inline: var(--margin-300px);
+  margin-bottom: 40px;
+}
+
+.dishes-cards {
+  gap: 18px;
+  display: flex;
+  flex-direction: column;
+}
+
+.categories {
+  background-color: white;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  gap: 5px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  height: 50px;
+  margin-left: var(--margin-300px);
+  transition: box-shadow 0.3s ease;
+  border-radius: 35px;
+}
+
+.scrolled-effect {
+  box-shadow: var(--shadow);
+  background-color: var(--light-gray);
+}
+
+.link {
+  border-radius: 35px;
+  /* margin-right: 5px; */
+  padding: 10px;
+  color: black;
+  font-size: var(--font-size-links);
+  font-weight: bold;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.link:focus,
+.link:active {
+  color: white;
+  background-color: black;
+}
+
+.headline-categories-over-single-dish-card {
+  scroll-margin-top: 60px;
+}
+
+.headline-categories-over-single-dish-card h1 {
+  font-size: var(--font-size-h1);
+  margin-top: 20px;
 }
