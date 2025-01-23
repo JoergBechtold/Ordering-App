@@ -4,6 +4,7 @@
   --prime-orange: #ff8000;
   --light-gray: #e6e4e4;
   --gray-disable: #888;
+  --light-yellow: #fff9df;
 
   /* shadow */
   --shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -11,9 +12,14 @@
 
   /* margin */
   --margin-300px: 300px;
+  --margin-top-80px: 80px;
 
   /* padding */
-  --padding-top-80px: 80px;
+  --padding-5px: 5px;
+
+  /* border */
+  --border: 1px solid var(--light-gray);
+  --border-radius-50px: 50px;
 
   /* border-radius */
   --border-radius-10px: 10px;
@@ -23,7 +29,10 @@
   --font-size-h2: clamp(16px, 2.5vw, 26px);
   --font-size-span: 25px 45px 0 45px;
   --font-size-links: clamp(14px, 2.5vw, 24px);
-  --font-size-span-basket: clamp(12px, 2.5vw, 16px);
+  --font-size-span-basket: clamp(13px, 2.5vw, 17px);
+
+  /* width */
+  --width-shopping-cart-container: 420px;
 }
 
 header {
@@ -59,12 +68,13 @@ header {
 
 main {
   display: flex;
-  flex-direction: row;
-  flex-grow: 1;
+  background-color: aqua;
+  /* flex-direction: row; */
+  /* flex-grow: 1; */
 }
 
 .left-content-section {
-  width: calc(100% - 470px);
+  width: calc(100% - var(--width-shopping-cart-container));
   background-color: var(--light-gray);
 }
 
@@ -116,10 +126,15 @@ main {
 
 .scrolled-effect {
   box-shadow: var(--shadow);
-  background-color: var(--light-gray);
+  height: 55px;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
 }
 
 .link {
+  display: flex;
+  align-items: center;
   border-radius: 35px;
   padding: 10px;
   color: black;
@@ -129,10 +144,10 @@ main {
   transition: all 0.3s ease;
 }
 
-.link.active {
+/* .link.active {
   color: white;
   background-color: black;
-}
+} */
 
 .link:focus,
 .link:active {

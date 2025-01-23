@@ -21,9 +21,11 @@ function processDishesByCategory(categories, dishesCardBurgerRef, dishesCardSupp
 
       if (category === 'burger') {
         declareKeysForCategorie(j, categoriesMultipleContent, newPrice, dishesCardBurgerRef); // dishes for burger
-      } else if (category === 'supplement') {
+      }
+      if (category === 'supplement') {
         declareKeysForCategorie(j, categoriesMultipleContent, newPrice, dishesCardSupplementRef); // dishes for supplement
-      } else if (category === 'drinks') {
+      }
+      if (category === 'drinks') {
         declareKeysForCategorie(j, categoriesMultipleContent, newPrice, dishesCardDrinksRef); // dishes for drink
       }
     }
@@ -34,7 +36,7 @@ function declareKeysForCategorie(j, category, newPrice, idRef) {
   let nameKey = category[j].name;
   let descriptionKey = category[j].description;
 
-  idRef.innerHTML += templateGeneratedDishesCardHtml(j, newPrice, nameKey, descriptionKey);
+  idRef.innerHTML += templateGeneratedDishesCardHtml(j, newPrice, nameKey, descriptionKey, category);
 }
 
 //Button Section for Basket
@@ -61,17 +63,34 @@ function switchToPickup() {
 //no value in basket
 function showNoValueInBasketScreen() {
   let noValueInBasketRef = document.getElementById('no_value_in_basket_container');
+  let basketDishesContainerRef = document.getElementById('basket_dishes_container');
 
-  if (basket.dish === '') {
+  if (basket.length === 0) {
     noValueInBasketRef.style.display = 'flex';
+    basketDishesContainerRef.style.display = 'none';
+  } else {
+    noValueInBasketRef.style.display = 'none';
+    basketDishesContainerRef.style.display = 'flex';
   }
 }
 
 function addDishToBasket(newPrice, nameKey) {
-  let newPriceForArray = newPrice.replace(',', '.');
-  basket.dish.push(nameKey), basket.price.push(newPriceForArray);
+  let newBasketDish = {
+    basketDishName: [nameKey],
+    basketDishPrice: [newPrice],
+    amount: 1,
+  };
 
-  basket.totalPrice = +basket.totalPrice + +newPriceForArray;
+  basket.push(newBasketDish);
+  showNoValueInBasketScreen();
+  renderBasket();
+}
 
-  console.log(basket);
+function renderBasket() {
+  let basketDishesContainerRef = document.getElementById('basket_single_dish_container');
+  basketDishesContainerRef.innerHTML = '';
+
+  for (let b = 0; b < basket.length; b++) {
+    basketDishesContainerRef.innerHTML += bla(b);
+  }
 }

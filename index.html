@@ -69,8 +69,8 @@
         </div>
       </section>
 
-      <section class="shopping-cart-container">
-        <div class="shoppin-card">
+      <section class="basket-container">
+        <div class="basket-content">
           <h1>Warenkorb</h1>
 
           <div class="switch-container">
@@ -80,8 +80,35 @@
 
           <div class="no-value-in-basket-container" id="no_value_in_basket_container">
             <div class="no-value-in-basket-content">
+              <!--show only when basket empty-->
               <img src="assets/icons/icon-warenkorb-96.png" alt="Bild vom Warenkorb Icon" />
               <h2>Dein Warenkorb ist leer</h2>
+            </div>
+          </div>
+
+          <div class="basket-dish-container" id="basket_dishes_container">
+            <!-- show all dishes in basket. greate in script.js -->
+            <div class="basket-dish-content">
+              <div class="minimun-order-container">
+                <span>Noch <b>... €</b> bis der Mindestbestellwert erreicht ist</span>
+              </div>
+
+              <div class="basket-single-dish-container" id="basket_single_dish_container">
+                <!-- render dish to basket -->
+              </div>
+
+              <div class="sum-of-the-cost-pay-btn">
+                <div class="subtotal">
+                  <span>Zwischensumme</span>
+                  <span>13,39€</span>
+                </div>
+                <div class="sum-total">
+                  <span><b>Gesamt</b></span>
+                  <span><b>13,39€</b></span>
+                </div>
+
+                <button disabled onclick="" class="pay-btn"><b>Bezahlen (12,39€)</b></button>
+              </div>
             </div>
           </div>
         </div>

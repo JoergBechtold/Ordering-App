@@ -1,3 +1,7 @@
+// global values
+let minimumOrderValue = 25.0;
+let deliveryCosts = 5.0;
+
 // Jason array for dishes
 let dishes = [
   {
@@ -5,30 +9,35 @@ let dishes = [
       {
         name: 'Colonel Original Burger',
         singlePrice: 7.99,
+        amount: 1,
         description:
           'Colonel Sanders legendäres Meisterstück für den Original Taste! Saftiges Chicken nach Colonel Sanders Originalrezept mehrmals täglich frisch vor Ort paniert und zubereitet. Kombiniert mit unserer würzigen Original Sauce, knackigem Salat, frischer Tomatenscheibe, einer Scheibe Cheese und cremiger Sandwich Sauce. Serviert in einem Brioche Bun.',
       },
       {
         name: 'BBQ Bacon Burger',
         singlePrice: 8.49,
+        amount: 1,
         description:
           'Ein rauchiges Highlight! Saftiges Beef-Patty, knuspriger Bacon, geschmolzener Cheddar-Käse, frische Zwiebelringe und knackiger Salat. Gekrönt mit einer herzhaften BBQ-Sauce in einem gerösteten Sesam-Bun.',
       },
       {
         name: 'Spicy Chicken Deluxe',
         singlePrice: 7.49,
+        amount: 1,
         description:
           'Für alle, die es scharf mögen! Knuspriges, scharf gewürztes Chicken-Filet, knackiger Eisbergsalat, frische Gurkenscheiben und cremige Chili-Mayonnaise. Serviert in einem lockeren Brioche Bun.',
       },
       {
         name: 'Vegan Garden Burger',
         singlePrice: 6.99,
+        amount: 1,
         description:
           'Ein Genuss für Vegetarier! Pflanzliches Patty auf Erbsenproteinbasis, frische Avocado-Creme, knackige Salatblätter, Gurken, Tomaten und eine vegane Knoblauchsauce. Eingebettet in ein Vollkorn-Brötchen.',
       },
       {
         name: 'Double Cheese Bacon Burger',
         singlePrice: 9.99,
+        amount: 1,
         description:
           'Doppelt hält besser! Zwei saftige Beef-Patties, zwei Scheiben geschmolzener Cheddar, knuspriger Bacon, frische Zwiebeln und würzige Burgersauce. Serviert in einem gerösteten Brioche-Bun.',
       },
@@ -106,11 +115,4 @@ let dishes = [
 ];
 
 // Jason array for basket
-let basket = {
-  dish: [],
-  price: [],
-  amount: 0,
-  minimumOrderValue: 25.0,
-  totalPrice: [],
-  deliveryCosts: 5.0,
-};
+let basket = [];
