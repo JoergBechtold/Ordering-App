@@ -4,11 +4,12 @@ function renderAllDishes() {
   let dishesCardDrinksRef = document.getElementById('dishes_cards_drinks');
   let categories = ['burger', 'supplement', 'drinks'];
 
-  showNoValueInBasketScreen(); //check if basket empty or not
+  checkIfBasketEmpty(); //check if basket empty or not
 
   emptyTheContainerInnerHtml(dishesCardBurgerRef, dishesCardSupplementRef, dishesCardDrinksRef);
 
   processDishesByCategory(categories, dishesCardBurgerRef, dishesCardSupplementRef, dishesCardDrinksRef);
+  renderBasket();
 }
 
 function processDishesByCategory(categories, dishesCardBurgerRef, dishesCardSupplementRef, dishesCardDrinksRef) {
@@ -41,37 +42,38 @@ function declareKeysForCategorie(j, category, newPrice, idRef) {
 
 //Button Section for Basket
 function switchToDelivery() {
-  let deliveryOption = document.getElementById('delivery');
-  let pickupOption = document.getElementById('pickup');
+  let deliveryOptionRef = document.getElementById('delivery');
+  let pickupOptionRef = document.getElementById('pickup');
+  let deliveryCostsRef = document.getElementById('delivery_costs');
+  let minimunOrderContainerRef = document.getElementById('minimum_order_container');
 
-  if (!deliveryOption.classList.contains('active')) {
-    deliveryOption.classList.add('active');
-    pickupOption.classList.remove('active');
+  if (!deliveryOptionRef.classList.contains('active')) {
+    deliveryOptionRef.classList.add('active');
+    pickupOptionRef.classList.remove('active');
+    deliveryCostsRef.style.display = 'flex';
+    minimunOrderContainerRef.style.display = 'flex';
+    totalPrice = Number(totalPrice) + Number(deliveryCostsValue);
   }
+
+  payBtn();
 }
 
 function switchToPickup() {
-  let deliveryOption = document.getElementById('delivery');
-  let pickupOption = document.getElementById('pickup');
+  let deliveryOptionRef = document.getElementById('delivery');
+  let pickupOptionRef = document.getElementById('pickup');
+  let deliveryCostsRef = document.getElementById('delivery_costs');
+  let minimunOrderContainerRef = document.getElementById('minimum_order_container');
 
-  if (!pickupOption.classList.contains('active')) {
-    pickupOption.classList.add('active');
-    deliveryOption.classList.remove('active');
+  if (!pickupOptionRef.classList.contains('active')) {
+    pickupOptionRef.classList.add('active');
+    deliveryOptionRef.classList.remove('active');
+    deliveryCostsRef.style.display = 'none';
+    minimunOrderContainerRef.style.display = 'none';
+
+    checkTotalPriceAndDeliveryCosts(); // in assets.js folder
   }
-}
 
-//no value in basket
-function showNoValueInBasketScreen() {
-  let noValueInBasketRef = document.getElementById('no_value_in_basket_container');
-  let basketDishesContainerRef = document.getElementById('basket_dishes_container');
-
-  if (basket.length === 0) {
-    noValueInBasketRef.style.display = 'flex';
-    basketDishesContainerRef.style.display = 'none';
-  } else {
-    noValueInBasketRef.style.display = 'none';
-    basketDishesContainerRef.style.display = 'flex';
-  }
+  payBtn();
 }
 
 function addDishToBasket(newPrice, nameKey) {
@@ -80,10 +82,18 @@ function addDishToBasket(newPrice, nameKey) {
     basketDishPrice: [newPrice],
     amount: 1,
   };
-
   basket.push(newBasketDish);
-  showNoValueInBasketScreen();
-  renderBasket();
+
+  // let totalPrice = 0;
+
+  for (let p = 0; p < basket.length; p++) {
+    let basketPrice = basket[p].basketDishPrice;
+
+    totalPrice + basketPrice;
+  }
+
+  checkIfBasketEmpty();
+  renderBasket(newPrice);
 }
 
 function renderBasket() {
@@ -91,6 +101,45 @@ function renderBasket() {
   basketDishesContainerRef.innerHTML = '';
 
   for (let b = 0; b < basket.length; b++) {
-    basketDishesContainerRef.innerHTML += bla(b);
+    basketDishesContainerRef.innerHTML += templateGeneratedBasketHtml(b);
   }
+
+  allrenderFunctionsForBasket();
+}
+
+function payBtn() {
+  let payBtnRef = document.getElementById('pay_btn');
+  payBtnRef.innerHTML = `<b>Bezahlen (${totalPrice}€)</b>`;
+}
+
+function minimumOrder() {
+  let minimumOrderRef = document.getElementById('minum_order');
+  minimumOrderRef.innerHTML = '';
+  minimumOrderRef.innerHTML += `Noch <b>${minimumOrderValue}€</b> bis der Mindestbestellwert erreicht ist`;
+}
+
+function deliveryCosts() {
+  let deliveryCostsRef = document.getElementById('delivery_costs_span');
+  deliveryCostsRef.innerHTML = '';
+  deliveryCostsRef.innerHTML += `${deliveryCostsValue}€`;
+}
+
+function showSubtotal() {
+  let subtotalSpanRef = document.getElementById('subtotal_span');
+  subtotalSpanRef.innerHTML = '';
+  subtotalSpanRef.innerHTML += `${subtotal}€`;
+}
+
+function showTotalPrice() {
+  let totalPriceRef = document.getElementById('total_price_span');
+  totalPriceRef.innerHTML = '';
+  totalPriceRef.innerHTML += `<b>${totalPrice}€</b>`;
+}
+
+function allrenderFunctionsForBasket() {
+  minimumOrder();
+  payBtn();
+  deliveryCosts();
+  showSubtotal();
+  showTotalPrice();
 }

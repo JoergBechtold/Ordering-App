@@ -34,7 +34,7 @@
       <!-- left content section -->
       <section class="left-content-section">
         <div class="background-section">
-          <img class="img-background-section" src="assets/img/burger-background-2.png" alt="Hintergrundbild" />
+          <img class="img-background-section" src="assets/img/burger-background-1.png" alt="Hintergrundbild" />
           <img class="img-logo-burger-company" src="assets/img/Logo-Burger-Company.png" alt="Logo vom Burger Laden" />
         </div>
 
@@ -70,7 +70,7 @@
       </section>
 
       <section class="basket-container">
-        <div class="basket-content">
+        <div id="basket_content" class="basket-content">
           <h1>Warenkorb</h1>
 
           <div class="switch-container">
@@ -88,27 +88,32 @@
 
           <div class="basket-dish-container" id="basket_dishes_container">
             <!-- show all dishes in basket. greate in script.js -->
-            <div class="basket-dish-content">
-              <div class="minimun-order-container">
-                <span>Noch <b>... €</b> bis der Mindestbestellwert erreicht ist</span>
+
+            <div id="minimum_order_container" class="minimun-order-container">
+              <span id="minum_order"></span>
+            </div>
+
+            <div class="basket-single-dish-container" id="basket_single_dish_container">
+              <!-- render dish to basket -->
+            </div>
+
+            <div class="sum-of-the-cost-pay-btn">
+              <div id="subtotal" class="subtotal">
+                <span>Zwischensumme</span>
+                <span id="subtotal_span"></span>
               </div>
 
-              <div class="basket-single-dish-container" id="basket_single_dish_container">
-                <!-- render dish to basket -->
+              <div id="delivery_costs" class="delivery-costs">
+                <span>Lieferkosten</span>
+                <span id="delivery_costs_span"></span>
               </div>
 
-              <div class="sum-of-the-cost-pay-btn">
-                <div class="subtotal">
-                  <span>Zwischensumme</span>
-                  <span>13,39€</span>
-                </div>
-                <div class="sum-total">
-                  <span><b>Gesamt</b></span>
-                  <span><b>13,39€</b></span>
-                </div>
-
-                <button disabled onclick="" class="pay-btn"><b>Bezahlen (12,39€)</b></button>
+              <div id="total_price" class="total-price">
+                <span><b>Gesamt</b></span>
+                <span id="total_price_span"></span>
               </div>
+
+              <button id="pay_btn" disabled onclick="" class="pay-btn"></button>
             </div>
           </div>
         </div>

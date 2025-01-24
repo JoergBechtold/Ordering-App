@@ -1,6 +1,8 @@
 // global values
 let minimumOrderValue = 25.0;
-let deliveryCosts = 5.0;
+let deliveryCostsValue = 5.0;
+let subtotal = 0;
+let totalPrice = 0;
 
 // Jason array for dishes
 let dishes = [
@@ -115,4 +117,20 @@ let dishes = [
 ];
 
 // Jason array for basket
-let basket = [];
+let basket = [
+  {
+    basketDishName: 'burger1',
+    basketDishPrice: 14.99,
+    amount: 1,
+  },
+  {
+    basketDishName: 'burger2',
+    basketDishPrice: 10.99,
+    amount: 1,
+  },
+  {
+    basketDishName: 'burger3',
+    basketDishPrice: 20.99,
+    amount: 1,
+  },
+];

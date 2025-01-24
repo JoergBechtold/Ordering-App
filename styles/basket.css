@@ -1,5 +1,5 @@
 .basket-container {
-  max-height: 100dvh;
+  /* max-height: 100dvh; */
   background-color: white;
   /* height: 650px; */
   width: var(--width-shopping-cart-container);
@@ -8,9 +8,7 @@
 }
 
 .basket-content {
-  /* max-height: 100dvh; */
-  height: 100%;
-  /* max-height: 100vh; */
+  max-height: calc(100dvh - var(--margin-top-80px));
   padding-inline: 14px;
   display: flex;
   flex-direction: column;
@@ -71,15 +69,21 @@
 }
 
 .basket-dish-container {
+  position: relative;
   display: flex;
-  justify-content: center;
-  margin-top: var(--margin-top-80px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  /* margin-top: var(--margin-top-80px); */
+  padding-top: 25px;
   width: 100%;
+  height: 78dvh;
 }
 
 .basket-dish-content {
   width: 100%;
-  overflow-y: scroll;
+
+  /* overflow-y: scroll; */
 }
 
 .minimun-order-container {
@@ -94,12 +98,14 @@
 
 .basket-single-dish-container {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
-  margin-top: 60px;
-  /* overflow-y: scroll; */
+  /* padding-top: 60px; */
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .basket-single-dish {
@@ -119,7 +125,7 @@
 
 .basket-single-dish-price,
 .sum-total {
-  /* margin-right: var(--margin-right-6px); */
+  padding-right: var(--padding-5px);
   font-size: var(--font-size-span-basket);
   font-weight: bold;
 }
@@ -161,18 +167,25 @@
   flex-direction: column;
   align-items: center;
   margin-top: 15px;
+  padding-bottom: 34px;
 }
 
 .subtotal,
-.sum-total,
+.total-price,
+.delivery-costs,
 .pay-btn {
   width: 100%;
 }
 
 .subtotal,
-.sum-total {
+.total-price,
+.delivery-costs {
   display: flex;
   justify-content: space-between;
+}
+
+.delivery-costs {
+  font-size: var(--font-size-span-basket);
 }
 
 .subtotal {
@@ -181,7 +194,7 @@
   border-bottom: var(--border);
 }
 
-.sum-total {
+.total-price {
   padding-top: var(--padding-5px);
 }
 

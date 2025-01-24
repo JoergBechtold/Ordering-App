@@ -25,3 +25,29 @@ function changeThePrice(i, j, category) {
   let newPrice = toFixedPrice.replace('.', ',');
   return newPrice;
 }
+
+function checkTotalPriceAndDeliveryCosts() {
+  if (totalPrice - deliveryCosts < 5) {
+    totalPrice = 0;
+  }
+}
+
+//no value in basket
+function checkIfBasketEmpty() {
+  let noValueInBasketRef = document.getElementById('no_value_in_basket_container');
+  let basketDishesContainerRef = document.getElementById('basket_dishes_container');
+
+  if (basket.length === 0) {
+    noValueInBasketRef.style.display = 'flex';
+    basketDishesContainerRef.style.display = 'none';
+  } else {
+    noValueInBasketRef.style.display = 'none';
+    basketDishesContainerRef.style.display = 'flex';
+  }
+}
+
+function dishToTrash(b) {
+  basket.splice(b, 1);
+  renderBasket();
+  checkIfBasketEmpty();
+}

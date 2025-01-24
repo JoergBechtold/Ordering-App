@@ -6,6 +6,10 @@
   font-family: 'Quicksand';
 }
 
+.height-100dvh {
+  height: 100dvh;
+}
+
 .d-none {
   display: none;
 }
@@ -44,4 +48,8 @@ a {
 ::-webkit-scrollbar-thumb:active {
   background: black;
   cursor: grabbing;
+}
+
+.basket-single-dish-container::-webkit-scrollbar {
+  width: 1px;
 }

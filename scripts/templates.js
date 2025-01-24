@@ -14,16 +14,16 @@ function templateGeneratedDishesCardHtml(j, newPrice, nameKey, descriptionKey, c
   `;
 }
 
-function bla(b) {
+function templateGeneratedBasketHtml(b) {
   return /*html*/ `
-  <div class="basket-single-dish">
+  <div id="basket_single_dish${b}"  class="basket-single-dish">
               <div class="basket-single-dishes-name-price">
                 <span class="basket-single-dish-name">${basket[b].basketDishName}</span>
                 <span class="basket-single-dish-price">${basket[b].basketDishPrice}€</span>
               </div>
               <div class="basket-single-dish-amount-container">
                 <div class="basket-single-dish-amount">
-                  <img src="assets/icons/icon-trash-96.png" alt="Mülleimer Icon" />
+                  <img id="dish_to_trash" onclick="dishToTrash(${b})" src="assets/icons/icon-trash-96.png" alt="Mülleimer Icon" />
                   <img src="assets/icons/icon-minus-96.png" alt="Minus Icon" />
                   <span class="basket-single-dish-amount-span"><b>${basket[b].amount}</b></span>
                   <img src="assets/icons/icon-plus-96.png" alt="Plus icon" />
