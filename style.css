@@ -5,6 +5,7 @@
   --light-gray: #e6e4e4;
   --gray-disable: #888;
   --light-yellow: #fff9df;
+  --footer: #4f4f4f;
 
   /* shadow */
   --shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
@@ -162,4 +163,8 @@ main {
 .headline-categories-over-single-dish-card h1 {
   font-size: var(--font-size-h1);
   margin-top: 20px;
+}
+
+footer {
+  background-color: var(--footer);
 }

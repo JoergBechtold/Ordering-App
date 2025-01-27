@@ -1,5 +1,6 @@
 // global values
 let minimumOrderValue = 25.0;
+let isDeliveryCostAdded = false;
 let deliveryCostsValue = 5.0;
 let subtotal = 0;
 let totalPrice = 0;
@@ -118,19 +119,19 @@ let dishes = [
 
 // Jason array for basket
 let basket = [
-  {
-    basketDishName: 'burger1',
-    basketDishPrice: 14.99,
-    amount: 1,
-  },
-  {
-    basketDishName: 'burger2',
-    basketDishPrice: 10.99,
-    amount: 1,
-  },
-  {
-    basketDishName: 'burger3',
-    basketDishPrice: 20.99,
-    amount: 1,
-  },
+  // {
+  //   basketDishName: 'Colonel Original Burger',
+  //   basketDishPrice: 14.99,
+  //   amount: 1,
+  // },
+  // {
+  //   basketDishName: 'burger2',
+  //   basketDishPrice: 10.99,
+  //   amount: 1,
+  // },
+  // {
+  //   basketDishName: 'burger3',
+  //   basketDishPrice: 20.99,
+  //   amount: 1,
+  // },
 ];

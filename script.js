@@ -53,6 +53,7 @@ function switchToDelivery() {
     deliveryCostsRef.style.display = 'flex';
     minimunOrderContainerRef.style.display = 'flex';
     totalPrice = Number(totalPrice) + Number(deliveryCostsValue);
+    isDeliveryCostAdded = true;
   }
 
   payBtn();
@@ -70,30 +71,48 @@ function switchToPickup() {
     deliveryCostsRef.style.display = 'none';
     minimunOrderContainerRef.style.display = 'none';
 
+    if (isDeliveryCostAdded === true) {
+      totalPrice = Number(totalPrice) - Number(deliveryCostsValue);
+      isDeliveryCostAdded = false;
+    }
+
     checkTotalPriceAndDeliveryCosts(); // in assets.js folder
   }
 
   payBtn();
 }
 
-function addDishToBasket(newPrice, nameKey) {
+function addDishToBasket(j, newPrice, nameKey) {
   let newBasketDish = {
-    basketDishName: [nameKey],
-    basketDishPrice: [newPrice],
+    basketDishName: nameKey,
+    basketDishPrice: newPrice,
     amount: 1,
   };
-  basket.push(newBasketDish);
 
-  // let totalPrice = 0;
+  let isInBasket = basket.find((meal) => meal.basketDishName == nameKey);
 
-  for (let p = 0; p < basket.length; p++) {
-    let basketPrice = basket[p].basketDishPrice;
-
-    totalPrice + basketPrice;
+  if (!isInBasket) {
+    basket.push(newBasketDish);
+  } else {
+    basket[j].amount++;
   }
 
+  // if (basket == '') {
+  //   basket.push(newBasketDish);
+  // } else {
+  //   for (let index = 0; index < basket.length; index++) {
+  //     let basketIndexOf = basket[index].basketDishName.indexOf(nameKey);
+  //     if (basketIndexOf == -1) {
+  //       basket.push(newBasketDish);
+  //       break;
+  //     } else {
+  //       basket[index].amount++;
+  //     }
+  //   }
+  // }
+
   checkIfBasketEmpty();
-  renderBasket(newPrice);
+  renderBasket();
 }
 
 function renderBasket() {
@@ -105,6 +124,14 @@ function renderBasket() {
   }
 
   allrenderFunctionsForBasket();
+}
+
+function renderPrice() {
+  for (let p = 0; p < basket.length; p++) {
+    let basketPrice = basket[p].basketDishPrice;
+
+    totalPrice + basketPrice;
+  }
 }
 
 function payBtn() {

@@ -8,7 +8,7 @@ function templateGeneratedDishesCardHtml(j, newPrice, nameKey, descriptionKey, c
              </span>
              <div id="add_dishes_btn${j}" class="add-dishes-btn">
                <!-- <img onclick="addDishToBasket(${j}, ${category})" src="assets/icons/icon-orange-plus-50.png" alt="Gericht hinzufühen Btn" /> -->
-               <img onclick="addDishToBasket('${newPrice}', '${nameKey}')" src="assets/icons/icon-orange-plus-50.png" alt="Gericht hinzufühen Btn" />
+               <img onclick="addDishToBasket(${j},'${newPrice}', '${nameKey}')" src="assets/icons/icon-orange-plus-50.png" alt="Gericht hinzufühen Btn" />
              </div>
            </div>
   `;
