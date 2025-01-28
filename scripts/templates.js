@@ -1,4 +1,4 @@
-function templateGeneratedDishesCardHtml(j, newPrice, nameKey, descriptionKey, category) {
+function templateGeneratedDishesCardHtml(i, dishesCategory, j, newPrice, nameKey, descriptionKey) {
   return /*html*/ `
       <div id="single_dishes_card${j}" class="single-dishes-card">
              <h2><b>${nameKey}</b></h2>
@@ -7,8 +7,8 @@ function templateGeneratedDishesCardHtml(j, newPrice, nameKey, descriptionKey, c
               ${descriptionKey}
              </span>
              <div id="add_dishes_btn${j}" class="add-dishes-btn">
-               <!-- <img onclick="addDishToBasket(${j}, ${category})" src="assets/icons/icon-orange-plus-50.png" alt="Gericht hinzufühen Btn" /> -->
-               <img onclick="addDishToBasket(${j},'${newPrice}', '${nameKey}')" src="assets/icons/icon-orange-plus-50.png" alt="Gericht hinzufühen Btn" />
+               
+               <img onclick="addDishToBasket(${i},${dishesCategory},${j},'${newPrice}', '${nameKey}')" src="assets/icons/icon-orange-plus-50.png" alt="Gericht hinzufühen Btn" />
              </div>
            </div>
   `;

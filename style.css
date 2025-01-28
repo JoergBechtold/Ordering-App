@@ -166,5 +166,24 @@ main {
 }
 
 footer {
+  gap: 15px;
+  padding: 35px;
   background-color: var(--footer);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-links {
+  gap: 25px;
+  display: flex;
+}
+
+footer a {
+  color: black;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }

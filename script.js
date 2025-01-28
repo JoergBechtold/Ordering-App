@@ -2,43 +2,54 @@ function renderAllDishes() {
   let dishesCardBurgerRef = document.getElementById('dishes_cards_burger');
   let dishesCardSupplementRef = document.getElementById('dishes_cards_supplement');
   let dishesCardDrinksRef = document.getElementById('dishes_cards_drinks');
-  let categories = ['burger', 'supplement', 'drinks'];
+  // let categories = ['burger', 'supplement', 'drinks'];
 
   checkIfBasketEmpty(); //check if basket empty or not
 
   emptyTheContainerInnerHtml(dishesCardBurgerRef, dishesCardSupplementRef, dishesCardDrinksRef);
 
-  processDishesByCategory(categories, dishesCardBurgerRef, dishesCardSupplementRef, dishesCardDrinksRef);
+  processDishesByCategory(dishesCardBurgerRef, dishesCardSupplementRef, dishesCardDrinksRef);
+
+  // processDishesByCategory(categories, dishesCardBurgerRef, dishesCardSupplementRef, dishesCardDrinksRef);
   renderBasket();
 }
 
-function processDishesByCategory(categories, dishesCardBurgerRef, dishesCardSupplementRef, dishesCardDrinksRef) {
-  for (let i = 0; i < categories.length; i++) {
-    let category = categories[i];
-    let categoriesMultipleContent = dishes[i][category];
+function processDishesByCategory(dishesCardBurgerRef, dishesCardSupplementRef, dishesCardDrinksRef) {
+  for (let i = 0; i < dishes.length; i++) {
+    // let category = dishes[i];
+    let dishesCategory = dishes[i].category;
+    // let categoryMenus = category;
 
-    for (let j = 0; j < categoriesMultipleContent.length; j++) {
-      let newPrice = changeThePrice(i, j, category);
+    for (let j = 0; j < dishes[i].menus.length; j++) {
+      // let singelMenu = dishes[i].menus[j];
+      let newPrice = changeThePrice(i, j);
 
-      if (category === 'burger') {
-        declareKeysForCategorie(j, categoriesMultipleContent, newPrice, dishesCardBurgerRef); // dishes for burger
+      if (dishesCategory === 'Burger') {
+        declareKeysForCategorie(i, j, dishesCategory, newPrice, dishesCardBurgerRef); // dishes for burger
       }
-      if (category === 'supplement') {
-        declareKeysForCategorie(j, categoriesMultipleContent, newPrice, dishesCardSupplementRef); // dishes for supplement
+      if (dishesCategory === 'Supplement') {
+        declareKeysForCategorie(i, j, dishesCategory, newPrice, dishesCardSupplementRef); // dishes for supplement
       }
-      if (category === 'drinks') {
-        declareKeysForCategorie(j, categoriesMultipleContent, newPrice, dishesCardDrinksRef); // dishes for drink
+      if (dishesCategory === 'Drinks') {
+        declareKeysForCategorie(i, j, dishesCategory, newPrice, dishesCardDrinksRef); // dishes for drink
       }
     }
   }
 }
 
-function declareKeysForCategorie(j, category, newPrice, idRef) {
-  let nameKey = category[j].name;
-  let descriptionKey = category[j].description;
+function declareKeysForCategorie(i, j, dishesCategory, newPrice, idRef) {
+  let nameKey = dishes[i].menus[j].name;
+  let descriptionKey = dishes[i].menus[j].description;
 
-  idRef.innerHTML += templateGeneratedDishesCardHtml(j, newPrice, nameKey, descriptionKey, category);
+  idRef.innerHTML += templateGeneratedDishesCardHtml(i, dishesCategory, j, newPrice, nameKey, descriptionKey);
 }
+
+// function declareKeysForCategorie(j, category, newPrice, idRef) {
+//   let nameKey = category[j].name;
+//   let descriptionKey = category[j].description;
+
+//   idRef.innerHTML += templateGeneratedDishesCardHtml(j, newPrice, nameKey, descriptionKey, category);
+// }
 
 //Button Section for Basket
 function switchToDelivery() {
@@ -82,34 +93,41 @@ function switchToPickup() {
   payBtn();
 }
 
-function addDishToBasket(j, newPrice, nameKey) {
+function addDishToBasket(i, dishesCategory, j, newPrice, nameKey) {
   let newBasketDish = {
+    basketCategory: dishesCategory,
     basketDishName: nameKey,
     basketDishPrice: newPrice,
     amount: 1,
   };
-
-  let isInBasket = basket.find((meal) => meal.basketDishName == nameKey);
-
-  if (!isInBasket) {
-    basket.push(newBasketDish);
-  } else {
-    basket[j].amount++;
-  }
-
-  // if (basket == '') {
+  // let basketIndexOf = basket.indexOf(nameKey);
+  // if (basketIndexOf == -1) {
   //   basket.push(newBasketDish);
   // } else {
-  //   for (let index = 0; index < basket.length; index++) {
-  //     let basketIndexOf = basket[index].basketDishName.indexOf(nameKey);
-  //     if (basketIndexOf == -1) {
-  //       basket.push(newBasketDish);
-  //       break;
-  //     } else {
-  //       basket[index].amount++;
-  //     }
-  //   }
+  //   basket.amount++;
   // }
+
+  // let isInBasket = basket.find((meal) => meal.basketDishName == nameKey);
+
+  // if (!isInBasket) {
+  //   basket.push(newBasketDish);
+  // } else {
+  //   basket[j].amount++;
+  // }
+
+  if (basket == '') {
+    basket.push(newBasketDish);
+  } else {
+    for (let index = 0; index < basket.length; index++) {
+      let basketIndexOf = basket[index].basketDishName.indexOf(nameKey);
+      if (basketIndexOf == -1) {
+        basket.push(newBasketDish);
+        break;
+      } else {
+        basket[index]['amount']++;
+      }
+    }
+  }
 
   checkIfBasketEmpty();
   renderBasket();

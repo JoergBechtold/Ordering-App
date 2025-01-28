@@ -20,11 +20,17 @@ function emptyTheContainerInnerHtml(dishesCardBurgerRef, dishesCardSupplementRef
   dishesCardDrinkstRef.innerHTML = '';
 }
 
-function changeThePrice(i, j, category) {
-  let toFixedPrice = dishes[i][category][j].singlePrice.toFixed(2);
+function changeThePrice(i, j) {
+  let toFixedPrice = dishes[i].menus[j].singlePrice.toFixed(2);
   let newPrice = toFixedPrice.replace('.', ',');
   return newPrice;
 }
+
+// function changeThePrice(i, j, category) {
+//   let toFixedPrice = dishes[i][category][j].singlePrice.toFixed(2);
+//   let newPrice = toFixedPrice.replace('.', ',');
+//   return newPrice;
+// }
 
 function checkTotalPriceAndDeliveryCosts() {
   if (totalPrice - deliveryCosts < 5) {
