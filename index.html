@@ -78,12 +78,18 @@
             <div id="pickup" class="switch-option" onclick="switchToPickup()"><span class="">Abholung</span></div>
           </div>
 
+          <!--show only when basket empty-->
           <div class="no-value-in-basket-container" id="no_value_in_basket_container">
             <div class="no-value-in-basket-content">
-              <!--show only when basket empty-->
               <img src="assets/icons/icon-warenkorb-96.png" alt="Bild vom Warenkorb Icon" />
               <h2>Dein Warenkorb ist leer</h2>
             </div>
+          </div>
+
+          <!--show only when order complete-->
+          <div class="order-complete" id="order_complete">
+            <h2>Danke für deine Bestellung!</h2>
+            <span>Was Willst'n hat bestätigt, dass Deine Bestellung in ungefähr 48 Minuten bei Dir ankommen wird!</span>
           </div>
 
           <div class="basket-dish-container" id="basket_dishes_container">
