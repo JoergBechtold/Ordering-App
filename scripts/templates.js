@@ -25,12 +25,12 @@ function templateRenderMenusHtml(indexDishes, indexMenus, newPrice) {
   `;
 }
 
-function templateGeneratedBasketHtml(indexBasket, priceComma) {
+function templateGeneratedBasketHtml(indexBasket, basketPriceComma) {
   return /*html*/ `
   <div id="basket_single_dish${indexBasket}"  class="basket-single-dish">
               <div class="basket-single-dishes-name-price">
                 <span class="basket-single-dish-name">${basket[indexBasket].basketDishName}</span>
-                <span class="basket-single-dish-price">${priceComma}€</span>
+                <span class="basket-single-dish-price">${basketPriceComma}€</span>
               </div>
               <div class="basket-single-dish-amount-container">
                 <div class="basket-single-dish-amount">

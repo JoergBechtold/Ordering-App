@@ -6,7 +6,7 @@ function renderDishes() {
     renderMenus(indexDishes);
   }
 
-  checkIfBasketEmpty(); //check if basket empty or not
+  checkIfBasketEmpty();
   renderBasket();
 }
 
@@ -30,11 +30,21 @@ function switchToDelivery() {
     pickupOptionRef.classList.remove('active');
     deliveryCostsRef.style.display = 'flex';
     minimunOrderContainerRef.style.display = 'flex';
-    totalPriceFormatted = Number(totalPriceFormatted) + Number(deliveryCostsValue);
-    isDeliveryCostAdded = true;
-  }
 
-  payBtn();
+    if (roundNewMinimumOrder < 0) {
+      minimunOrderContainerRef.style.display = 'none';
+    }
+    if (isDeliveryCostAdded === true) {
+      deliveryCosts = 5;
+      isDeliveryCostAdded = false;
+    }
+
+    roundTotalPrice = Math.round(totalPrice * 100) / 100;
+    totalPriceComma = roundTotalPrice.toFixed(2).replace('.', ',');
+  }
+  checkIfPickuoOrDelivery(); // in assets.js
+  checkMinimumOrderValueIsReached(newMinimumOrder); // in assets.js
+  updateAllPrices();
 }
 
 function switchToPickup() {
@@ -49,15 +59,14 @@ function switchToPickup() {
     deliveryCostsRef.style.display = 'none';
     minimunOrderContainerRef.style.display = 'none';
 
-    if (isDeliveryCostAdded === true) {
-      totalPriceFormatted = totalPrice - deliveryCostsValue;
-      isDeliveryCostAdded = false;
+    if (isDeliveryCostAdded === false) {
+      deliveryCosts = 0;
+      isDeliveryCostAdded = true;
     }
-
-    checkTotalPriceAndDeliveryCosts(); // in assets.js folder
   }
-
-  payBtn();
+  checkIfPickuoOrDelivery(); // in assets.js
+  checkMinimumOrderValueIsReached(newMinimumOrder); // in assets.js
+  updateAllPrices();
 }
 
 function addMenuToBasket(indexDishes, indexMenus, newPrice) {
@@ -75,7 +84,9 @@ function addMenuToBasket(indexDishes, indexMenus, newPrice) {
   if (indexAddToBasket === -1) {
     basket.push(newBasketDish);
   } else {
-    basket[indexAddToBasket]['amount']++;
+    if (basket[indexAddToBasket]['amount'] < 10) {
+      basket[indexAddToBasket]['amount']++;
+    }
   }
 
   checkIfBasketEmpty(); // in assets.js
@@ -90,63 +101,69 @@ function renderBasket() {
   subtotal = 0;
 
   for (let indexBasket = 0; indexBasket < basket.length; indexBasket++) {
-    let price = basket[indexBasket]['basketDishPrice'];
-    let amounts = basket[indexBasket]['amount'];
+    let basketPrice = basket[indexBasket]['basketDishPrice'];
+    let basketamounts = basket[indexBasket]['amount'];
 
-    let priceComma = price.toFixed(2).replace('.', ',');
-    let priceAsNumber = parseFloat(price.toFixed(2));
+    let basketPriceComma = basketPrice.toFixed(2).replace('.', ',');
+    subtotal = subtotal + basketPrice * basketamounts;
+    newMinimumOrder = minimumOrder - subtotal;
 
-    subtotal = calculatesTotalSubtotal(priceAsNumber, amounts, subtotal);
-
-    newMinimumOrderValue = minimumOrderValue - subtotal;
-
-    roundNewMinimumOrderValue = Math.round(newMinimumOrderValue * 100) / 100;
-
-    basketDishesContainerRef.innerHTML += templateGeneratedBasketHtml(indexBasket, priceComma);
+    checkMinimumOrderValueIsReached(newMinimumOrder); // in assets.js
+    basketDishesContainerRef.innerHTML += templateGeneratedBasketHtml(indexBasket, basketPriceComma);
   }
-  totalPrice = subtotal + deliveryCostsValue;
-  totalPriceFormatted = totalPrice.toFixed(2).replace(',', '.');
 
-  allrenderFunctionsForBasket(subtotal);
+  checkIfPickuoOrDelivery(); // in assets.js
+
+  updateAllPrices();
+}
+
+function checkTotalPriceAndDeliveryCosts() {
+  return totalPriceFormatted - deliveryCosts;
 }
 
 function payBtn() {
   let payBtnRef = document.getElementById('pay_btn');
-  payBtnRef.innerHTML = `<b>Bezahlen (${totalPriceFormatted}€)</b>`;
+
+  let roundPayPrice = Math.round(totalPrice * 100) / 100;
+  roundPayPriceComma = roundPayPrice.toFixed(2).replace('.', ',');
+  payBtnRef.innerHTML = `<b>Bezahlen (${roundPayPriceComma}€)</b>`;
 }
 
-function minimumOrder() {
+function showMinimumOrder() {
   let minimumOrderRef = document.getElementById('minum_order');
-
+  let roundNewMinimumOrder = Math.round(newMinimumOrder * 100) / 100;
+  roundNewMinimumOrderComma = roundNewMinimumOrder.toFixed(2).replace('.', ',');
   minimumOrderRef.innerHTML = '';
-  minimumOrderRef.innerHTML += `Noch <b>${roundNewMinimumOrderValue}€</b> bis der Mindestbestellwert erreicht ist`;
+  minimumOrderRef.innerHTML += `Noch <b>${roundNewMinimumOrderComma}€</b> bis der Mindestbestellwert erreicht ist`;
 }
 
-function deliveryCosts() {
+function showDeliveryCosts() {
   let deliveryCostsRef = document.getElementById('delivery_costs_span');
   deliveryCostsRef.innerHTML = '';
-  deliveryCostsRef.innerHTML += `${deliveryCostsValue}€`;
+  deliveryCostsRef.innerHTML += `${deliveryCosts}€`;
 }
 
-function showSubtotal(subtotal) {
-  showSubtotalRounder = Math.round(subtotal * 100) / 100;
+function showSubtotal() {
   let subtotalSpanRef = document.getElementById('subtotal_span');
+  let subtotalRound = Math.round(subtotal * 100) / 100;
+  subtotalRoundComma = subtotalRound.toFixed(2).replace('.', ',');
   subtotalSpanRef.innerHTML = '';
-  subtotalSpanRef.innerHTML += `${showSubtotalRounder}€`;
+  subtotalSpanRef.innerHTML += `${subtotalRoundComma}€`;
 }
 
 function showTotalPrice() {
   let totalPriceRef = document.getElementById('total_price_span');
+  let totalPriceRound = Math.round(totalPrice * 100) / 100;
+  totalPriceComma = totalPriceRound.toFixed(2).replace('.', ',');
   totalPriceRef.innerHTML = '';
-  totalPriceRef.innerHTML += `<b>${totalPriceFormatted}€</b>`;
+  totalPriceRef.innerHTML += `<b>${totalPriceComma}€</b>`;
 }
 
-function allrenderFunctionsForBasket(subtotal) {
-  minimumOrder();
+function updateAllPrices() {
   payBtn();
-  deliveryCosts();
-  checkMinimumOrderValueIsReached();
-  showSubtotal(subtotal);
+  showMinimumOrder();
+  showDeliveryCosts();
+  showSubtotal();
   showTotalPrice();
 }
 

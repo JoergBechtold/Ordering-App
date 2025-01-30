@@ -12,7 +12,8 @@
   --shadow-card: 0px 0px 1px 0px rgba(0, 0, 0, 0.12), 0px 1px 5px 0px rgba(0, 0, 0, 0.04), 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 
   /* margin */
-  --margin-200px: 200px;
+  /* --margin-200px: 200px; */
+  --margin-200px: 15%;
   --margin-top-80px: 80px;
 
   /* padding */
@@ -188,11 +189,19 @@ main {
   text-align: center;
 }
 
+.basket-content h1 {
+  font-size: var(--font-size-h1);
+}
+
+.no-value-in-basket-content h2 {
+  font-size: var(--font-size-h2);
+}
+
 footer {
   /* position: absolute;
   bottom: 0; */
   width: 100%;
-  gap: 15px;
+  gap: 40px;
   padding: 35px;
   background-color: var(--footer);
   display: flex;
@@ -215,5 +224,31 @@ footer a:hover {
   text-decoration: underline;
 }
 
-@media (max-width: 1670px) {
+@media (max-width: 1150px) {
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 992px) {
+  :root {
+    --width-shopping-cart-container: 340px;
+    --margin-200px: 8%;
+  }
+
+  .basket-single-dish-amount {
+    padding: 7px;
+  }
+
+  .pay-btn {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 370px) {
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+  }
 }

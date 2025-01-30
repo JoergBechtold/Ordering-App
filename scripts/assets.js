@@ -2,15 +2,12 @@ window.onscroll = checkStickyPosition;
 
 function checkStickyPosition() {
   let categories = document.getElementById('categories_content');
-  // let links = document.getElementsByClassName('links');
   let rect = categories.getBoundingClientRect();
 
   if (rect.top <= 0) {
     categories.classList.add('scrolled-effect');
-    // links.classList.add('scrolled-effect');
   } else {
     categories.classList.remove('scrolled-effect');
-    // links.classList.remove('scrolled-effect');
   }
 }
 
@@ -20,21 +17,15 @@ function changeThePrice(indexDishes, indexMenus) {
   return newPrice;
 }
 
-function checkMinimumOrderValueIsReached() {
+function checkMinimumOrderValueIsReached(newMinimumOrder) {
   let minimunOrderContainerRef = document.getElementById('minimum_order_container');
   payBtnRef = document.getElementById('pay_btn');
-  if (roundNewMinimumOrderValue < 0) {
+  if (newMinimumOrder < 0) {
     minimunOrderContainerRef.style.display = 'none';
     payBtnRef.disabled = false;
   } else {
     minimunOrderContainerRef.style.display = 'flex';
     payBtnRef.disabled = true;
-  }
-}
-
-function checkTotalPriceAndDeliveryCosts() {
-  if (totalPriceFormatted - deliveryCostsValue < 5) {
-    totalPriceFormatted = 0;
   }
 }
 
@@ -50,10 +41,6 @@ function checkIfBasketEmpty() {
     noValueInBasketRef.style.display = 'none';
     basketDishesContainerRef.style.display = 'flex';
   }
-}
-
-function calculatesTotalSubtotal(priceAsNumber, amounts, subtotal) {
-  return subtotal + priceAsNumber * amounts;
 }
 
 function plusAmount(b) {
@@ -79,4 +66,8 @@ function dishToTrash(b) {
     subtotal = 0;
     minimumOrderValue = 25.0;
   }
+}
+
+function checkIfPickuoOrDelivery() {
+  return (totalPrice = subtotal + deliveryCosts);
 }
