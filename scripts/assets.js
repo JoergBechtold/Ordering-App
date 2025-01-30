@@ -1,7 +1,7 @@
 window.onscroll = checkStickyPosition;
 
 function checkStickyPosition() {
-  let categories = document.getElementById('categories');
+  let categories = document.getElementById('categories_content');
   // let links = document.getElementsByClassName('links');
   let rect = categories.getBoundingClientRect();
 
@@ -14,27 +14,27 @@ function checkStickyPosition() {
   }
 }
 
-function emptyTheContainerInnerHtml(dishesCardBurgerRef, dishesCardSupplementRef, dishesCardDrinkstRef) {
-  dishesCardBurgerRef.innerHTML = '';
-  dishesCardSupplementRef.innerHTML = '';
-  dishesCardDrinkstRef.innerHTML = '';
-}
-
-function changeThePrice(i, j) {
-  let toFixedPrice = dishes[i].menus[j].singlePrice.toFixed(2);
-  let newPrice = toFixedPrice.replace('.', ',');
+function changeThePrice(indexDishes, indexMenus) {
+  let toFixedPrice = dishes[indexDishes].menus[indexMenus].singlePrice.toFixed(2);
+  let newPrice = parseFloat(toFixedPrice.replace(',', '.'));
   return newPrice;
 }
 
-// function changeThePrice(i, j, category) {
-//   let toFixedPrice = dishes[i][category][j].singlePrice.toFixed(2);
-//   let newPrice = toFixedPrice.replace('.', ',');
-//   return newPrice;
-// }
+function checkMinimumOrderValueIsReached() {
+  let minimunOrderContainerRef = document.getElementById('minimum_order_container');
+  payBtnRef = document.getElementById('pay_btn');
+  if (roundNewMinimumOrderValue < 0) {
+    minimunOrderContainerRef.style.display = 'none';
+    payBtnRef.disabled = false;
+  } else {
+    minimunOrderContainerRef.style.display = 'flex';
+    payBtnRef.disabled = true;
+  }
+}
 
 function checkTotalPriceAndDeliveryCosts() {
-  if (totalPrice - deliveryCosts < 5) {
-    totalPrice = 0;
+  if (totalPriceFormatted - deliveryCostsValue < 5) {
+    totalPriceFormatted = 0;
   }
 }
 
@@ -52,8 +52,31 @@ function checkIfBasketEmpty() {
   }
 }
 
+function calculatesTotalSubtotal(priceAsNumber, amounts, subtotal) {
+  return subtotal + priceAsNumber * amounts;
+}
+
+function plusAmount(b) {
+  if (basket[b]['amount'] < 10) {
+    basket[b]['amount']++;
+    renderBasket();
+  }
+}
+
+function minusAmount(b) {
+  if (basket[b]['amount'] > 1) {
+    basket[b]['amount']--;
+    renderBasket();
+  }
+}
+
 function dishToTrash(b) {
   basket.splice(b, 1);
   renderBasket();
   checkIfBasketEmpty();
+  if (basket.length === 0) {
+    totalPrice = 0;
+    subtotal = 0;
+    minimumOrderValue = 25.0;
+  }
 }

@@ -1,9 +1,11 @@
 // global values
 let minimumOrderValue = 25.0;
+let roundNewMinimumOrderValue = 0;
 let isDeliveryCostAdded = false;
 let deliveryCostsValue = 5.0;
-let subtotal = 0;
+let totalPriceFormatted = 0;
 let totalPrice = 0;
+let subtotal = 0;
 
 // Jason array for dishes
 // let dishes = [
@@ -159,7 +161,7 @@ let dishes = [
     ],
   },
   {
-    category: 'Supplement',
+    category: 'Beilagen',
     menus: [
       {
         name: 'Crispy Fries',

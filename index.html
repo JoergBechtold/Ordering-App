@@ -24,9 +24,11 @@
     <link rel="stylesheet" href="styles/standard.css" />
     <link rel="stylesheet" href="styles/singleDishesCard.css" />
   </head>
-  <body onload="renderAllDishes()">
+  <body onload="renderDishes()">
     <header id="id_header">
-      <div class="header-logo"><img src="assets/icons/Logo.png" alt="Logo Bestell App" /></div>
+      <div class="header-logo">
+        <a href="#index.html"><img src="assets/icons/Logo.png" alt="Logo Bestell App" /></a>
+      </div>
       <div class="header-burger-icon"><img src="assets/icons/burger-solid.svg" alt="" /></div>
     </header>
 
@@ -39,34 +41,40 @@
         </div>
 
         <div id="categories" class="categories">
-          <a class="link active" href="#id_header">Start</a>
-          <a class="link" href="#Burger">Burger</a>
-          <a class="link" href="#Supplement">Beilagen</a>
-          <a class="link" href="#Drinks">Getränke</a>
+          <div id="categories_content" class="categories-content">
+            <a class="link active" href="#id_header">Start</a>
+            <a class="link" href="#Burger">Burger</a>
+            <a class="link" href="#Beilagen">Beilagen</a>
+            <a class="link" href="#Drinks">Getränke</a>
+          </div>
         </div>
 
         <div id="dishes_container" class="dishes-container">
+          <!-- render here the categories an dishes -->
+        </div>
+
+        <!-- <div id="dishes_container" class="dishes-container">
           <div id="Burger" class="headline-categories-over-single-dish-card">
             <h1>Burger</h1>
             <div id="dishes_cards_burger" class="dishes-cards-burger">
-              <!-- render burger dishes here with javascript -->
+              
             </div>
           </div>
 
           <div id="Supplement" class="headline-categories-over-single-dish-card">
             <h1>Beilagen</h1>
             <div id="dishes_cards_supplement" class="dishes-cards-supplement">
-              <!-- render supplement dishes here with javascript -->
+             
             </div>
           </div>
 
           <div id="Drinks" class="headline-categories-over-single-dish-card">
             <h1>Getränke</h1>
             <div id="dishes_cards_drinks" class="dishes-cards-drinks">
-              <!-- render drinks dishes here with javascript -->
+              <
             </div>
           </div>
-        </div>
+        </div> -->
       </section>
 
       <section class="basket-container">
@@ -119,7 +127,7 @@
                 <span id="total_price_span"></span>
               </div>
 
-              <button id="pay_btn" disabled onclick="" class="pay-btn"></button>
+              <button id="pay_btn" disabled onclick="orderCompleteBtn()" class="pay-btn"></button>
             </div>
           </div>
         </div>

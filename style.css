@@ -12,7 +12,7 @@
   --shadow-card: 0px 0px 1px 0px rgba(0, 0, 0, 0.12), 0px 1px 5px 0px rgba(0, 0, 0, 0.04), 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
 
   /* margin */
-  --margin-300px: 300px;
+  --margin-200px: 200px;
   --margin-top-80px: 80px;
 
   /* padding */
@@ -70,8 +70,7 @@ header {
 main {
   display: flex;
   background-color: aqua;
-  /* flex-direction: row; */
-  /* flex-grow: 1; */
+  min-height: 100dvh;
 }
 
 .left-content-section {
@@ -89,7 +88,7 @@ main {
   aspect-ratio: 1/1;
   position: absolute;
   bottom: 30px;
-  left: var(--margin-300px);
+  left: var(--margin-200px);
   border-radius: 6px;
 }
 
@@ -100,7 +99,7 @@ main {
 }
 
 .dishes-container {
-  margin-inline: var(--margin-300px);
+  margin-inline: var(--margin-200px);
   margin-bottom: 40px;
 }
 
@@ -111,18 +110,23 @@ main {
 }
 
 .categories {
-  background-color: white;
+  display: flex;
+  align-items: center;
   position: sticky;
   top: 0;
   z-index: 3;
+
+  margin-inline: var(--margin-200px);
+  transition: box-shadow 0.3s ease;
+}
+
+.categories-content {
+  background-color: white;
+  border-radius: 35px;
   gap: 5px;
-  width: fit-content;
   display: flex;
   align-items: center;
-  height: 50px;
-  margin-left: var(--margin-300px);
-  transition: box-shadow 0.3s ease;
-  border-radius: 35px;
+  width: fit-content;
 }
 
 .scrolled-effect {
@@ -185,6 +189,9 @@ main {
 }
 
 footer {
+  /* position: absolute;
+  bottom: 0; */
+  width: 100%;
   gap: 15px;
   padding: 35px;
   background-color: var(--footer);
@@ -201,8 +208,12 @@ footer {
 
 footer a {
   color: black;
+  font-size: var(--font-size-span);
 }
 
 footer a:hover {
   text-decoration: underline;
+}
+
+@media (max-width: 1670px) {
 }

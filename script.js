@@ -1,57 +1,24 @@
-function renderAllDishes() {
-  let dishesCardBurgerRef = document.getElementById('dishes_cards_burger');
-  let dishesCardSupplementRef = document.getElementById('dishes_cards_supplement');
-  let dishesCardDrinksRef = document.getElementById('dishes_cards_drinks');
-  // let categories = ['burger', 'supplement', 'drinks'];
+function renderDishes() {
+  let dishesContainerRef = document.getElementById('dishes_container');
+
+  for (let indexDishes = 0; indexDishes < dishes.length; indexDishes++) {
+    dishesContainerRef.innerHTML += templateRenderDishesHtml(indexDishes); // in templates.js
+    renderMenus(indexDishes);
+  }
 
   checkIfBasketEmpty(); //check if basket empty or not
-
-  emptyTheContainerInnerHtml(dishesCardBurgerRef, dishesCardSupplementRef, dishesCardDrinksRef);
-
-  processDishesByCategory(dishesCardBurgerRef, dishesCardSupplementRef, dishesCardDrinksRef);
-
-  // processDishesByCategory(categories, dishesCardBurgerRef, dishesCardSupplementRef, dishesCardDrinksRef);
   renderBasket();
 }
 
-function processDishesByCategory(dishesCardBurgerRef, dishesCardSupplementRef, dishesCardDrinksRef) {
-  for (let i = 0; i < dishes.length; i++) {
-    // let category = dishes[i];
-    let dishesCategory = dishes[i].category;
-    // let categoryMenus = category;
+function renderMenus(indexDishes) {
+  let dishesCardRef = document.getElementById(`dishes_card_${indexDishes}`);
+  for (let indexMenus = 0; indexMenus < dishes[indexDishes].menus.length; indexMenus++) {
+    let newPrice = changeThePrice(indexDishes, indexMenus); // in assets.js
 
-    for (let j = 0; j < dishes[i].menus.length; j++) {
-      // let singelMenu = dishes[i].menus[j];
-      let newPrice = changeThePrice(i, j);
-
-      if (dishesCategory === 'Burger') {
-        declareKeysForCategorie(i, j, dishesCategory, newPrice, dishesCardBurgerRef); // dishes for burger
-      }
-      if (dishesCategory === 'Supplement') {
-        declareKeysForCategorie(i, j, dishesCategory, newPrice, dishesCardSupplementRef); // dishes for supplement
-      }
-      if (dishesCategory === 'Drinks') {
-        declareKeysForCategorie(i, j, dishesCategory, newPrice, dishesCardDrinksRef); // dishes for drink
-      }
-    }
+    dishesCardRef.innerHTML += templateRenderMenusHtml(indexDishes, indexMenus, newPrice); // in templates.js
   }
 }
 
-function declareKeysForCategorie(i, j, dishesCategory, newPrice, idRef) {
-  let nameKey = dishes[i].menus[j].name;
-  let descriptionKey = dishes[i].menus[j].description;
-
-  idRef.innerHTML += templateGeneratedDishesCardHtml(i, dishesCategory, j, newPrice, nameKey, descriptionKey);
-}
-
-// function declareKeysForCategorie(j, category, newPrice, idRef) {
-//   let nameKey = category[j].name;
-//   let descriptionKey = category[j].description;
-
-//   idRef.innerHTML += templateGeneratedDishesCardHtml(j, newPrice, nameKey, descriptionKey, category);
-// }
-
-//Button Section for Basket
 function switchToDelivery() {
   let deliveryOptionRef = document.getElementById('delivery');
   let pickupOptionRef = document.getElementById('pickup');
@@ -63,7 +30,7 @@ function switchToDelivery() {
     pickupOptionRef.classList.remove('active');
     deliveryCostsRef.style.display = 'flex';
     minimunOrderContainerRef.style.display = 'flex';
-    totalPrice = Number(totalPrice) + Number(deliveryCostsValue);
+    totalPriceFormatted = Number(totalPriceFormatted) + Number(deliveryCostsValue);
     isDeliveryCostAdded = true;
   }
 
@@ -83,7 +50,7 @@ function switchToPickup() {
     minimunOrderContainerRef.style.display = 'none';
 
     if (isDeliveryCostAdded === true) {
-      totalPrice = Number(totalPrice) - Number(deliveryCostsValue);
+      totalPriceFormatted = totalPrice - deliveryCostsValue;
       isDeliveryCostAdded = false;
     }
 
@@ -93,43 +60,25 @@ function switchToPickup() {
   payBtn();
 }
 
-function addDishToBasket(i, dishesCategory, j, newPrice, nameKey) {
+function addMenuToBasket(indexDishes, indexMenus, newPrice) {
+  let menuName = dishes[indexDishes].menus[indexMenus].name;
   let newBasketDish = {
-    basketCategory: dishesCategory,
-    basketDishName: nameKey,
+    basketDishName: menuName,
     basketDishPrice: newPrice,
     amount: 1,
   };
-  // let basketIndexOf = basket.indexOf(nameKey);
-  // if (basketIndexOf == -1) {
-  //   basket.push(newBasketDish);
-  // } else {
-  //   basket.amount++;
-  // }
 
-  // let isInBasket = basket.find((meal) => meal.basketDishName == nameKey);
+  let indexAddToBasket = basket.findIndex((menu) => {
+    return menu.basketDishName === newBasketDish.basketDishName;
+  });
 
-  // if (!isInBasket) {
-  //   basket.push(newBasketDish);
-  // } else {
-  //   basket[j].amount++;
-  // }
-
-  if (basket == '') {
+  if (indexAddToBasket === -1) {
     basket.push(newBasketDish);
   } else {
-    for (let index = 0; index < basket.length; index++) {
-      let basketIndexOf = basket[index].basketDishName.indexOf(nameKey);
-      if (basketIndexOf == -1) {
-        basket.push(newBasketDish);
-        break;
-      } else {
-        basket[index]['amount']++;
-      }
-    }
+    basket[indexAddToBasket]['amount']++;
   }
 
-  checkIfBasketEmpty();
+  checkIfBasketEmpty(); // in assets.js
   renderBasket();
 }
 
@@ -137,30 +86,40 @@ function renderBasket() {
   let basketDishesContainerRef = document.getElementById('basket_single_dish_container');
   basketDishesContainerRef.innerHTML = '';
 
-  for (let b = 0; b < basket.length; b++) {
-    basketDishesContainerRef.innerHTML += templateGeneratedBasketHtml(b);
+  totalPrice = 0;
+  subtotal = 0;
+
+  for (let indexBasket = 0; indexBasket < basket.length; indexBasket++) {
+    let price = basket[indexBasket]['basketDishPrice'];
+    let amounts = basket[indexBasket]['amount'];
+
+    let priceComma = price.toFixed(2).replace('.', ',');
+    let priceAsNumber = parseFloat(price.toFixed(2));
+
+    subtotal = calculatesTotalSubtotal(priceAsNumber, amounts, subtotal);
+
+    newMinimumOrderValue = minimumOrderValue - subtotal;
+
+    roundNewMinimumOrderValue = Math.round(newMinimumOrderValue * 100) / 100;
+
+    basketDishesContainerRef.innerHTML += templateGeneratedBasketHtml(indexBasket, priceComma);
   }
+  totalPrice = subtotal + deliveryCostsValue;
+  totalPriceFormatted = totalPrice.toFixed(2).replace(',', '.');
 
-  allrenderFunctionsForBasket();
-}
-
-function renderPrice() {
-  for (let p = 0; p < basket.length; p++) {
-    let basketPrice = basket[p].basketDishPrice;
-
-    totalPrice + basketPrice;
-  }
+  allrenderFunctionsForBasket(subtotal);
 }
 
 function payBtn() {
   let payBtnRef = document.getElementById('pay_btn');
-  payBtnRef.innerHTML = `<b>Bezahlen (${totalPrice}€)</b>`;
+  payBtnRef.innerHTML = `<b>Bezahlen (${totalPriceFormatted}€)</b>`;
 }
 
 function minimumOrder() {
   let minimumOrderRef = document.getElementById('minum_order');
+
   minimumOrderRef.innerHTML = '';
-  minimumOrderRef.innerHTML += `Noch <b>${minimumOrderValue}€</b> bis der Mindestbestellwert erreicht ist`;
+  minimumOrderRef.innerHTML += `Noch <b>${roundNewMinimumOrderValue}€</b> bis der Mindestbestellwert erreicht ist`;
 }
 
 function deliveryCosts() {
@@ -169,22 +128,29 @@ function deliveryCosts() {
   deliveryCostsRef.innerHTML += `${deliveryCostsValue}€`;
 }
 
-function showSubtotal() {
+function showSubtotal(subtotal) {
+  showSubtotalRounder = Math.round(subtotal * 100) / 100;
   let subtotalSpanRef = document.getElementById('subtotal_span');
   subtotalSpanRef.innerHTML = '';
-  subtotalSpanRef.innerHTML += `${subtotal}€`;
+  subtotalSpanRef.innerHTML += `${showSubtotalRounder}€`;
 }
 
 function showTotalPrice() {
   let totalPriceRef = document.getElementById('total_price_span');
   totalPriceRef.innerHTML = '';
-  totalPriceRef.innerHTML += `<b>${totalPrice}€</b>`;
+  totalPriceRef.innerHTML += `<b>${totalPriceFormatted}€</b>`;
 }
 
-function allrenderFunctionsForBasket() {
+function allrenderFunctionsForBasket(subtotal) {
   minimumOrder();
   payBtn();
   deliveryCosts();
-  showSubtotal();
+  checkMinimumOrderValueIsReached();
+  showSubtotal(subtotal);
   showTotalPrice();
+}
+
+function orderCompleteBtn() {
+  let orderCompleteRef = document.getElementById('order_complete');
+  orderCompleteRef.style.display = 'flex';
 }

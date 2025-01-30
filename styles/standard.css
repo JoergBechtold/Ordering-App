@@ -6,6 +6,11 @@
   font-family: 'Quicksand';
 }
 
+body {
+  min-height: 100dvh;
+  position: relative;
+}
+
 .height-100dvh {
   height: 100dvh;
 }
