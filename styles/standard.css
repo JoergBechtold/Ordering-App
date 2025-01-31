@@ -34,7 +34,8 @@ a {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background-color: var(--light-gray);
+  /* background-color: var(--light-gray); */
+  background-color: var(--prime-orange);
   border-radius: 10px;
 }
 

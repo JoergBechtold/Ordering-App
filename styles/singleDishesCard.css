@@ -31,6 +31,7 @@
 }
 
 .add-dishes-btn img {
+  aspect-ratio: 1 / 1;
   width: 100%;
   cursor: pointer;
 }

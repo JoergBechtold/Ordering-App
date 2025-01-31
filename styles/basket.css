@@ -1,11 +1,7 @@
 .basket-container {
-  /* max-height: calc(100dvh - var(--margin-top-80px)); */
-
-  /* max-height: 100dvh; */
+  position: relative;
   background-color: white;
-  /* height: 650px; */
   width: var(--width-shopping-cart-container);
-  /* flex-grow: 1; */
   box-shadow: -4px 0px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -215,4 +211,17 @@
 
 .pay-btn:disabled {
   cursor: not-allowed;
+}
+
+/* responsive view */
+.responsive-view-basket {
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  min-height: 100dvh;
 }

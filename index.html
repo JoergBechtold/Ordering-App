@@ -54,13 +54,16 @@
         </div>
       </section>
 
-      <section class="basket-container">
+      <section id="basket_container" class="basket-container">
+        <div onclick="closeBasketBtn()" id="close_basket_btn" class="close-basket-btn">
+          <img src="assets/icons/icon-close-60.png" alt="X icon zum schließen" />
+        </div>
         <div id="basket_content" class="basket-content">
           <h1>Warenkorb</h1>
 
           <div class="switch-container">
-            <div id="delivery" class="switch-option active" onclick="switchToDelivery()"><span class="">Lieferung</span></div>
-            <div id="pickup" class="switch-option" onclick="switchToPickup()"><span class="">Abholung</span></div>
+            <div id="delivery" class="switch-option active" onclick="switchToDelivery()"><span>Lieferung</span></div>
+            <div id="pickup" class="switch-option" onclick="switchToPickup()"><span>Abholung</span></div>
           </div>
 
           <!--show only when basket empty-->
@@ -107,6 +110,17 @@
               <button id="pay_btn" disabled onclick="orderCompleteBtn()" class="pay-btn"></button>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section class="responsive-btn-show-basket" id="responsive_btn_show_basket">
+        <div onclick="showResponsiveBasket()" class="responsive-btn-content">
+          <div class="icon-basket-responsive-box">
+            <img class="icon-basket-responsive" id="icon-basket-responsive" src="assets/icons/icon-warenkorb-96.png" alt="Bild vom Warenkorb Icon" />
+            <p id="amount_icon_basket_responsive" class="amount-icon-basket-responsive">0</p>
+          </div>
+          <h2>Warenkorb</h2>
+          <span id="total_price_responsive_btn"></span>
         </div>
       </section>
     </main>

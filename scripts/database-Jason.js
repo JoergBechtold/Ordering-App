@@ -6,9 +6,9 @@ let isDeliveryCostAdded = false;
 let deliveryCosts = 5.0;
 let roundTotalPriceComma = 0;
 let roundNewMinimumOrderComma = 0;
-// let payPrice = 0;
 let roundPayPriceComma = 0;
 let subtotalRoundComma = 0;
+let totalAmount = 0;
 
 let totalPrice = 0;
 let subtotal = 0;

@@ -94,11 +94,14 @@ function addMenuToBasket(indexDishes, indexMenus, newPrice) {
 }
 
 function renderBasket() {
+  let amountIconBasketResponsiveRef = document.getElementById('amount_icon_basket_responsive');
+  let totalPriceResponsiveBtnRef = document.getElementById('total_price_responsive_btn');
   let basketDishesContainerRef = document.getElementById('basket_single_dish_container');
   basketDishesContainerRef.innerHTML = '';
 
   totalPrice = 0;
   subtotal = 0;
+  totalAmount = 0;
 
   for (let indexBasket = 0; indexBasket < basket.length; indexBasket++) {
     let basketPrice = basket[indexBasket]['basketDishPrice'];
@@ -107,14 +110,24 @@ function renderBasket() {
     let basketPriceComma = basketPrice.toFixed(2).replace('.', ',');
     subtotal = subtotal + basketPrice * basketamounts;
     newMinimumOrder = minimumOrder - subtotal;
+    totalAmount += basketamounts;
 
     checkMinimumOrderValueIsReached(newMinimumOrder); // in assets.js
+
     basketDishesContainerRef.innerHTML += templateGeneratedBasketHtml(indexBasket, basketPriceComma);
   }
+
+  amountIconBasketResponsiveRef.innerHTML = `${totalAmount}`;
 
   totalPrice = checkIfPickupOrDelivery(); // in assets.js
 
   updateAllPrices();
+  totalPriceResponsiveBtnRef.innerHTML = `${totalPriceComma}€`;
+}
+
+function calcAmountPlusBasketLength(basketamounts) {
+  let amountPlusBasketLength = basketamounts + basket.length;
+  return amountPlusBasketLength;
 }
 
 function checkTotalPriceAndDeliveryCosts() {
@@ -170,4 +183,26 @@ function updateAllPrices() {
 function orderCompleteBtn() {
   let orderCompleteRef = document.getElementById('order_complete');
   orderCompleteRef.style.display = 'flex';
+}
+
+function showResponsiveBasket() {
+  let basketContainerRef = document.getElementById('basket_container');
+  let responsiveBtnShowBasketRef = document.getElementById('responsive_btn_show_basket');
+  let closeBasketBtnRef = document.getElementById('close_basket_btn');
+
+  responsiveBtnShowBasketRef.classList.add('d-none');
+  closeBasketBtnRef.style.display = 'flex';
+  document.body.classList.add('no-scroll');
+  basketContainerRef.classList.add('responsive-view-basket');
+}
+
+function closeBasketBtn() {
+  let basketContainerRef = document.getElementById('basket_container');
+  let responsiveBtnShowBasketRef = document.getElementById('responsive_btn_show_basket');
+  let closeBasketBtnRef = document.getElementById('close_basket_btn');
+
+  responsiveBtnShowBasketRef.classList.remove('d-none');
+  closeBasketBtnRef.style.display = 'none';
+  document.body.classList.remove('no-scroll');
+  basketContainerRef.classList.remove('responsive-view-basket');
 }
