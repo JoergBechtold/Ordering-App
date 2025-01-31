@@ -31,7 +31,7 @@ function switchToDelivery() {
     deliveryCostsRef.style.display = 'flex';
     minimunOrderContainerRef.style.display = 'flex';
 
-    if (roundNewMinimumOrder < 0) {
+    if (roundNewMinimumOrderComma < 0) {
       minimunOrderContainerRef.style.display = 'none';
     }
     if (isDeliveryCostAdded === true) {
@@ -42,7 +42,7 @@ function switchToDelivery() {
     roundTotalPrice = Math.round(totalPrice * 100) / 100;
     totalPriceComma = roundTotalPrice.toFixed(2).replace('.', ',');
   }
-  checkIfPickuoOrDelivery(); // in assets.js
+  totalPrice = checkIfPickupOrDelivery(); // in assets.js
   checkMinimumOrderValueIsReached(newMinimumOrder); // in assets.js
   updateAllPrices();
 }
@@ -64,7 +64,7 @@ function switchToPickup() {
       isDeliveryCostAdded = true;
     }
   }
-  checkIfPickuoOrDelivery(); // in assets.js
+  totalPrice = checkIfPickupOrDelivery(); // in assets.js
   checkMinimumOrderValueIsReached(newMinimumOrder); // in assets.js
   updateAllPrices();
 }
@@ -112,7 +112,7 @@ function renderBasket() {
     basketDishesContainerRef.innerHTML += templateGeneratedBasketHtml(indexBasket, basketPriceComma);
   }
 
-  checkIfPickuoOrDelivery(); // in assets.js
+  totalPrice = checkIfPickupOrDelivery(); // in assets.js
 
   updateAllPrices();
 }

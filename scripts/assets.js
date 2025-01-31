@@ -19,13 +19,19 @@ function changeThePrice(indexDishes, indexMenus) {
 
 function checkMinimumOrderValueIsReached(newMinimumOrder) {
   let minimunOrderContainerRef = document.getElementById('minimum_order_container');
-  payBtnRef = document.getElementById('pay_btn');
-  if (newMinimumOrder < 0) {
-    minimunOrderContainerRef.style.display = 'none';
+  let pickupOptionRef = document.getElementById('pickup');
+  let payBtnRef = document.getElementById('pay_btn');
+
+  // if (pickupOptionRef.classList.contains('active')) {
+  //   minimunOrderContainerRef.style.display = 'none';
+  // }
+
+  if (newMinimumOrder < 0 || pickupOptionRef.classList.contains('active')) {
     payBtnRef.disabled = false;
+    minimunOrderContainerRef.style.display = 'none';
   } else {
-    minimunOrderContainerRef.style.display = 'flex';
     payBtnRef.disabled = true;
+    minimunOrderContainerRef.style.display = 'flex';
   }
 }
 
@@ -68,6 +74,6 @@ function dishToTrash(b) {
   }
 }
 
-function checkIfPickuoOrDelivery() {
+function checkIfPickupOrDelivery() {
   return (totalPrice = subtotal + deliveryCosts);
 }
