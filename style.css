@@ -189,10 +189,11 @@ main {
   right: 0;
   max-height: calc(100dvh - var(--margin-top-80px));
   background-color: white;
-  z-index: 9;
+  z-index: 999;
 }
 
-.order-complete span {
+.order-complete span,
+h2 {
   text-align: center;
 }
 
@@ -234,12 +235,12 @@ footer a:hover {
 
 .close-basket-btn {
   display: none;
-  z-index: 999;
+  z-index: 9;
   cursor: pointer;
   position: absolute;
   top: 10px;
   right: 10px;
-  /* display: flex; */
+
   width: 35px;
   aspect-ratio: 1/1;
 }
@@ -297,14 +298,19 @@ footer a:hover {
 
 .amount-icon-basket-responsive {
   position: absolute;
-  display: grid;
-  place-items: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
   top: -5px;
   right: -6px;
   width: clamp(19px, 2.5vw, 24px);
   aspect-ratio: 1/1;
   border-radius: 50%;
   background-color: black;
+}
+
+.amount-icon-basket-responsive p {
   color: white;
   font-size: var(--font-size-p-responsive-btn);
   font-weight: bolder;
@@ -337,6 +343,10 @@ Große Screens	1441+ */
 @media (max-width: 1025px) {
   .basket-container {
     display: none;
+  }
+
+  .order-complete {
+    max-height: unset;
   }
   .responsive-btn-show-basket {
     display: flex;

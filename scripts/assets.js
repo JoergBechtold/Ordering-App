@@ -73,3 +73,20 @@ function dishToTrash(b) {
 function checkIfPickupOrDelivery() {
   return (totalPrice = subtotal + deliveryCosts);
 }
+
+function deleteBasketArray() {
+  basket.splice(0, basket.length);
+}
+
+function resetAllValuesToZero() {
+  minimumOrder = 25.0;
+  newMinimumOrder = 0;
+  roundNewMinimumOrder = 0;
+  isDeliveryCostAdded = false;
+  deliveryCosts = 5.0;
+  roundTotalPriceComma = 0;
+  roundNewMinimumOrderComma = 0;
+  roundPayPriceComma = 0;
+  subtotalRoundComma = 0;
+  totalAmount = 0;
+}

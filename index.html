@@ -27,7 +27,7 @@
   <body onload="renderDishes()">
     <header id="id_header">
       <div class="header-logo">
-        <a href="#index.html"><img src="assets/icons/Logo.png" alt="Logo Bestell App" /></a>
+        <a href="index.html"><img src="assets/icons/Logo.png" alt="Logo Bestell App" /></a>
       </div>
       <div class="header-burger-icon"><img src="assets/icons/burger-solid.svg" alt="" /></div>
     </header>
@@ -118,7 +118,9 @@
         <div onclick="showResponsiveBasket()" class="responsive-btn-content">
           <div class="icon-basket-responsive-box">
             <img class="icon-basket-responsive" id="icon-basket-responsive" src="assets/icons/icon-warenkorb-96.png" alt="Bild vom Warenkorb Icon" />
-            <p id="amount_icon_basket_responsive" class="amount-icon-basket-responsive">0</p>
+            <div class="amount-icon-basket-responsive">
+              <p id="amount_icon_basket_responsive">0</p>
+            </div>
           </div>
           <h2>Warenkorb</h2>
           <span id="total_price_responsive_btn"></span>

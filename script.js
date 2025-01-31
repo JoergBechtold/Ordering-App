@@ -136,7 +136,6 @@ function checkTotalPriceAndDeliveryCosts() {
 
 function payBtn() {
   let payBtnRef = document.getElementById('pay_btn');
-
   let roundPayPrice = Math.round(totalPrice * 100) / 100;
   roundPayPriceComma = roundPayPrice.toFixed(2).replace('.', ',');
   payBtnRef.innerHTML = `<b>Bezahlen (${roundPayPriceComma}€)</b>`;
@@ -183,6 +182,10 @@ function updateAllPrices() {
 function orderCompleteBtn() {
   let orderCompleteRef = document.getElementById('order_complete');
   orderCompleteRef.style.display = 'flex';
+  resetAllValuesToZero();
+  deleteBasketArray();
+  renderBasket();
+  updateAllPrices();
 }
 
 function showResponsiveBasket() {
@@ -200,9 +203,11 @@ function closeBasketBtn() {
   let basketContainerRef = document.getElementById('basket_container');
   let responsiveBtnShowBasketRef = document.getElementById('responsive_btn_show_basket');
   let closeBasketBtnRef = document.getElementById('close_basket_btn');
+  let orderCompleteRef = document.getElementById('order_complete');
 
   responsiveBtnShowBasketRef.classList.remove('d-none');
   closeBasketBtnRef.style.display = 'none';
   document.body.classList.remove('no-scroll');
   basketContainerRef.classList.remove('responsive-view-basket');
+  orderCompleteRef.style.display = 'none';
 }
