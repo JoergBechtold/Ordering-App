@@ -342,14 +342,22 @@ Große Screens	1441+ */
     display: flex;
   }
 
-  .basket-content {
-    width: 80% !important;
-    /* height: 100dvh !important; */
+  .switch-container {
+    width: unset !important;
   }
 
-  /* .responsive-view-basket {
-    justify-content: center;
-  } */
+  .basket-dish-container {
+    height: 85dvh !important;
+  }
+
+  .sum-of-the-cost-pay-btn {
+    padding: 0;
+  }
+
+  .basket-content {
+    width: 80% !important;
+    max-height: unset !important;
+  }
 
   footer {
     margin-bottom: 90px;

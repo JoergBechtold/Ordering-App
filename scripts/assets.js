@@ -22,10 +22,6 @@ function checkMinimumOrderValueIsReached(newMinimumOrder) {
   let pickupOptionRef = document.getElementById('pickup');
   let payBtnRef = document.getElementById('pay_btn');
 
-  // if (pickupOptionRef.classList.contains('active')) {
-  //   minimunOrderContainerRef.style.display = 'none';
-  // }
-
   if (newMinimumOrder < 0 || pickupOptionRef.classList.contains('active')) {
     payBtnRef.disabled = false;
     minimunOrderContainerRef.style.display = 'none';
