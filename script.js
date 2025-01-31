@@ -186,6 +186,7 @@ function orderCompleteBtn() {
   deleteBasketArray();
   renderBasket();
   updateAllPrices();
+  checkIfBasketEmpty();
 }
 
 function showResponsiveBasket() {
