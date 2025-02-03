@@ -73,7 +73,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  /* margin-top: var(--margin-top-80px); */
   padding-top: 25px;
   width: 100%;
   height: 78dvh;
@@ -81,8 +80,6 @@
 
 .basket-dish-content {
   width: 100%;
-
-  /* overflow-y: scroll; */
 }
 
 .minimun-order-container {
@@ -100,9 +97,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
   align-items: center;
-  /* padding-top: 60px; */
   overflow-y: auto;
   overflow-x: hidden;
 }
