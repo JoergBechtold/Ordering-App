@@ -55,8 +55,10 @@ function plusAmount(b) {
 function minusAmount(b) {
   if (basket[b]['amount'] > 1) {
     basket[b]['amount']--;
-    renderBasket();
+  } else {
+    basket.splice(b, 1);
   }
+  renderBasket();
 }
 
 function dishToTrash(b) {
