@@ -27,12 +27,19 @@
   --border-radius-10px: 10px;
 
   /* font-sizes */
-  --font-size-h1: clamp(18px, 2.5vw, 28px);
+  /* --font-size-h1: clamp(18px, 2.5vw, 28px);
   --font-size-h2: clamp(16px, 2.5vw, 26px);
   --font-size-span: clamp(14px, 2.5vw, 20px);
   --font-size-links: clamp(14px, 2.5vw, 24px);
   --font-size-span-basket: clamp(13px, 2.5vw, 17px);
-  --font-size-p-responsive-btn: clamp(8px, 2.5vw, 16px);
+  --font-size-p-responsive-btn: clamp(8px, 2.5vw, 16px); */
+
+  --font-size-h1: clamp(18px, 14.5217px + 1.087vw, 28px);
+  --font-size-h2: clamp(16px, 12.5217px + 1.087vw, 26px);
+  --font-size-span: clamp(14px, 11.913px + 0.6522vw, 20px);
+  --font-size-links: clamp(14px, 10.5217px + 1.087vw, 24px);
+  --font-size-span-basket: clamp(13px, 11.6087px + 0.4348vw, 17px);
+  --font-size-p-responsive-btn: clamp(8px, 5.2174px + 0.8696vw, 16px);
 
   /* width */
   --width-shopping-cart-container: 420px;
@@ -192,8 +199,7 @@ main {
   z-index: 999;
 }
 
-.order-complete span,
-h2 {
+.order-complete span h2 {
   text-align: center;
 }
 
